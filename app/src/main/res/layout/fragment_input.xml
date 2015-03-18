@@ -1,241 +1,177 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2015 Bernd Busse
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbarAlwaysDrawVerticalTrack="true"
-    android:scrollbars="vertical"
-    tools:context=".MainActivity" >
-    
-    <TextView
-        android:id="@+id/header_tv_body"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:text="@string/input_header_body"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+    android:orientation="vertical"
+    tools:context=".gui.MainActivity">
 
-    <ImageView
-        android:id="@+id/header_divider_body"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/header_tv_body"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="@string/input_header_body"
-        android:scaleType="fitXY"
-        android:src="@android:drawable/divider_horizontal_textfield" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-    
-    <TextView
-        android:id="@+id/input_tv_bodyweight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/editText1"
-        android:layout_alignBaseline="@+id/editText1"
-        android:text="@string/input_weight"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/editText1"
-        android:layout_width="100sp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/header_divider_body"
-        android:layout_toLeftOf="@+id/input_tv_weight_unit"
-        android:ems="10"
-        android:inputType="numberDecimal" />
+            <!-- Main Header -->
+            <TextView
+                android:id="@+id/input_label_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:text="@string/input_label_header"
+                android:textAppearance="@style/TextAppearance.Large" />
 
-    <TextView
-        android:id="@+id/input_tv_weight_unit"
-        android:layout_width="48sp"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editText1"
-        android:layout_alignBottom="@+id/editText1"
-        android:layout_alignParentRight="true"
-        android:text="@string/input_weight_unit"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <ImageView
+                android:id="@+id/input_divider_header"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/input_label_header"
+                android:contentDescription="@string/input_divider_desc"
+                android:scaleType="fitXY"
+                android:src="@android:drawable/divider_horizontal_textfield" />
 
-    
-    <TextView
-        android:id="@+id/input_tv_bodyheight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignBaseline="@+id/editText2"
-        android:layout_toLeftOf="@id/editText2"
-        android:text="@string/input_height"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <!-- Body Weight Input -->
+            <TextView
+                android:id="@+id/input_label_body_weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_divider_header"
+                android:layout_marginTop="@dimen/element_vertical_margin"
+                android:text="@string/input_label_body_weight" />
 
-    <EditText
-        android:id="@+id/editText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText1"
-        android:layout_alignRight="@+id/editText1"
-        android:layout_below="@+id/editText1"
-        android:ems="10"
-        android:inputType="numberDecimal" />
+            <de.busse_apps.bakcalculator.widget.ClearableEditText
+                android:id="@+id/input_field_body_weight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_label_body_weight"
+                android:drawableEnd="@drawable/ic_action_remove"
+                android:drawableRight="@drawable/ic_action_remove"
+                android:ems="10"
+                android:hint="@string/input_hint_body_weight"
+                android:inputType="numberDecimal" />
 
-    <TextView
-        android:id="@+id/input_tv_height_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editText2"
-        android:layout_alignLeft="@+id/input_tv_weight_unit"
-        android:layout_alignParentRight="true"
-        android:text="@string/input_height_unit"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <!-- Body Height Input -->
+            <TextView
+                android:id="@+id/input_label_body_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_field_body_weight"
+                android:layout_marginTop="@dimen/element_vertical_margin"
+                android:text="@string/input_label_body_height" />
 
-    
-    <TextView
-        android:id="@+id/input_tv_age"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignBaseline="@+id/editText3"
-        android:layout_toLeftOf="@+id/editText3"
-        android:text="@string/input_age"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <de.busse_apps.bakcalculator.widget.ClearableEditText
+                android:id="@+id/input_field_body_height"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_label_body_height"
+                android:drawableEnd="@drawable/ic_action_remove"
+                android:drawableRight="@drawable/ic_action_remove"
+                android:ems="10"
+                android:hint="@string/input_hint_body_height"
+                android:inputType="numberDecimal" />
 
-    <EditText
-        android:id="@+id/editText3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_alignRight="@+id/editText2"
-        android:layout_below="@+id/editText2"
-        android:ems="10"
-        android:inputType="number" />
+            <!-- Age Input -->
+            <TextView
+                android:id="@+id/input_label_body_age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_field_body_height"
+                android:layout_marginTop="@dimen/element_vertical_margin"
+                android:text="@string/input_label_body_age" />
 
-    <TextView
-        android:id="@+id/input_tv_age_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editText3"
-        android:layout_alignLeft="@+id/input_tv_height_unit"
-        android:layout_alignParentRight="true"
-        android:text="@string/input_age_unit"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <de.busse_apps.bakcalculator.widget.ClearableEditText
+                android:id="@+id/input_field_body_age"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_label_body_age"
+                android:drawableEnd="@drawable/ic_action_remove"
+                android:drawableRight="@drawable/ic_action_remove"
+                android:ems="10"
+                android:hint="@string/input_hint_body_age"
+                android:inputType="numberDecimal" />
 
-    
-    <TextView
-        android:id="@+id/input_tv_sex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignBaseline="@+id/spinner1"
-        android:layout_toLeftOf="@+id/spinner1"
-        android:text="@string/input_sex"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <!-- Sex Spinner -->
+            <TextView
+                android:id="@+id/input_label_body_sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_field_body_age"
+                android:layout_marginTop="@dimen/element_vertical_margin"
+                android:text="@string/input_label_body_sex" />
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText3"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/editText3"
-        tools:listitem="@android:layout/simple_spinner_item" />
-    
-    
-    <TextView
-        android:id="@+id/header_tv_drink"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/spinner1"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:text="@string/input_header_drink"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <ImageView
-        android:id="@+id/header_divider_drink"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/header_tv_drink"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="@string/input_header_drink"
-        android:scaleType="fitXY"
-        android:src="@android:drawable/divider_horizontal_textfield" />
-
-    
-    <TextView
-        android:id="@+id/input_tv_volume_drunken"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignBaseline="@+id/editText5"
-        android:layout_toLeftOf="@+id/editText5"
-        android:text="@string/input_volume_drunken"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <EditText
-        android:id="@+id/editText5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText3"
-        android:layout_alignRight="@+id/editText3"
-        android:layout_below="@+id/header_divider_drink"
-        android:ems="10"
-        android:inputType="numberDecimal" />
-    
-    <TextView
-        android:id="@+id/input_tv_volume_drunken_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editText5"
-        android:layout_alignLeft="@+id/input_tv_age_unit"
-        android:layout_alignParentRight="true"
-        android:text="@string/input_volume_drunken_unit"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <Spinner
+                android:id="@+id/input_spinner_body_sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_label_body_sex"
+                tools:listitem="@android:layout/simple_spinner_item" />
 
 
-    <TextView
-        android:id="@+id/input_tv_volume_percent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@+id/editText6"
-        android:layout_alignBaseline="@+id/editText6"
-        android:text="@string/input_volume_percent"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <!-- Drink Volume Input -->
+            <TextView
+                android:id="@+id/input_label_drink_volume"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_spinner_body_sex"
+                android:layout_marginTop="@dimen/element_vertical_margin"
+                android:text="@string/input_label_drink_volume" />
 
-    <EditText
-        android:id="@+id/editText6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText5"
-        android:layout_alignRight="@+id/editText5"
-        android:layout_below="@+id/editText5"
-        android:ems="10"
-        android:inputType="numberDecimal" />
+            <de.busse_apps.bakcalculator.widget.ClearableEditText
+                android:id="@+id/input_field_drink_volume"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_label_drink_volume"
+                android:drawableEnd="@drawable/ic_action_remove"
+                android:drawableRight="@drawable/ic_action_remove"
+                android:ems="10"
+                android:hint="@string/input_hint_drink_volume"
+                android:inputType="numberDecimal" />
 
-    <TextView
-        android:id="@+id/input_tv_volume_percent_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/editText6"
-        android:layout_alignLeft="@+id/input_tv_volume_drunken_unit"
-        android:layout_alignParentRight="true"
-        android:text="@string/input_volume_percent_unit"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+            <!-- Drink Percent Input -->
+            <TextView
+                android:id="@+id/input_label_drink_percent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_field_drink_volume"
+                android:layout_marginTop="@dimen/element_vertical_margin"
+                android:text="@string/input_label_drink_percent" />
 
-    
+            <de.busse_apps.bakcalculator.widget.ClearableEditText
+                android:id="@+id/input_field_drink_percent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_label_drink_percent"
+                android:drawableEnd="@drawable/ic_action_remove"
+                android:drawableRight="@drawable/ic_action_remove"
+                android:ems="10"
+                android:hint="@string/input_hint_drink_percent"
+                android:inputType="numberDecimal" />
+
+        </RelativeLayout>
+    </ScrollView>
+
     <Button
-        android:id="@+id/input_btn_calculate"
-        android:layout_width="wrap_content"
+        android:id="@+id/input_button_calculate"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:text="@string/input_btn_calculate" />
+        android:layout_weight="0"
+        android:text="@string/input_button_calculate" />
 
-</RelativeLayout>
+</LinearLayout>

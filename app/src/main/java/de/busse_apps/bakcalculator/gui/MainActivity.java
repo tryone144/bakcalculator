@@ -29,10 +29,16 @@ import de.busse_apps.bakcalculator.R;
 
 public class MainActivity extends ActionBarActivity {
 
+    public static final String SPLASH_FRAGMENT_TAG = "de.busse_apps.bakcalculator.gui.SplashFragment";
+    public static final String INPUT_FRAGMENT_TAG = "de.busse_apps.bakcalculator.gui.InputFragment";
+
     private FragmentManager mFragmentManager;
     private ActionBar mActionBar;
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
+
+    private boolean homeAsUpEnabled;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +47,10 @@ public class MainActivity extends ActionBarActivity {
         mActionBar = getSupportActionBar();
         mFragmentManager = getSupportFragmentManager();
 
+        mFragmentManager.addOnBackStackChangedListener(new MyBackstackListener());
+
         mNavigationDrawerFragment = new NavigationDrawerFragment();
-        ((NavigationDrawerFragment)mFragmentManager.findFragmentById(R.id.main_fragment_drawer)).setUp();
+        //((NavigationDrawerFragment)mFragmentManager.findFragmentById(R.id.main_fragment_drawer)).setUp();
         //mNavigationDrawerFragment = (NavigationDrawerFragment) mFragmentManager.findFragmentById(R.id.main_fragment_drawer);
         //mTitle = getTitle();
 
@@ -51,7 +59,14 @@ public class MainActivity extends ActionBarActivity {
         //        R.id.main_navigation_drawer,
         //        (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        if (savedInstanceState == null) {
+            homeAsUpEnabled = false;
+            FragmentTransaction ft = mFragmentManager.beginTransaction();
 
+            SplashFragment mSplashFragment = new SplashFragment();
+            mSplashFragment.setArguments(getIntent().getExtras());
+            ft.add(R.id.main_fragment_container, mSplashFragment, SPLASH_FRAGMENT_TAG).commit();
+        }
 //        if (findViewById(R.id.main_fragment_container) != null) {
 //            if (savedInstanceState == null) {
 //                MainFragment mainFragment = new MainFragment();
@@ -74,4 +89,48 @@ public class MainActivity extends ActionBarActivity {
 //        transaction.commit();
 //    }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        if (mFragmentManager.getBackStackEntryCount() > 0) {
+            mFragmentManager.popBackStack();
+        }
+        return false;
+    }
+
+    protected void openInputFragment() {
+        InputFragment mInputFragment = new InputFragment();
+        addFragment(mInputFragment, INPUT_FRAGMENT_TAG, null, true);
+    }
+
+    private void setHomeAsUpEnabled(boolean enabled) {
+        homeAsUpEnabled = enabled;
+        mActionBar.setDisplayHomeAsUpEnabled(homeAsUpEnabled);
+        mActionBar.setHomeButtonEnabled(homeAsUpEnabled);
+    }
+
+    private void addFragment(Fragment fragment, String tag, Bundle args, boolean toBackStack) {
+        FragmentTransaction ft = mFragmentManager.beginTransaction();
+        fragment.setArguments(args);
+        ft.replace(R.id.main_fragment_container, fragment, tag);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        if (toBackStack) {
+            ft.addToBackStack(tag);
+        }
+        ft.commit();
+
+        if (toBackStack) {
+            setHomeAsUpEnabled(true);
+        }
+    }
+
+    /**
+     * FragmentManager.OnBackStackChangedListener for handling HomeAsUp Button
+     */
+    private class MyBackstackListener implements FragmentManager.OnBackStackChangedListener {
+        @Override
+        public void onBackStackChanged() {
+            boolean canback = mFragmentManager.getBackStackEntryCount() > 0;
+            setHomeAsUpEnabled(canback);
+        }
+    }
 }

@@ -24,8 +24,10 @@
     <string name="menu_action_share">Share</string>
 
 
-    <!-- SplashFragment texts --><!--
-    <string name="splash_text_title">How much I need to poop measuring device</string>
+    <!-- SplashFragment texts -->
+    <string name="splash_text_title">Blood Alcohol Concentration</string>
+    <string name="splash_button_start">Start!</string>
+    <!--<string name="splash_text_title">How much I need to poop measuring device</string>
     <string name="splash_banner_start">Startup</string>
     <string name="splash_button_start">Start Meassure!</string>-->
 
@@ -33,12 +35,18 @@
     <string name="input_label_header">Following data is necessary:</string>
     <string name="input_divider_desc">Divider</string>
 
-    <string name="input_label_lasttime">How long ago did you poop?</string>
-    <string name="input_hint_lasttime">in hours</string>
-    <string name="input_label_masseaten">How much did you eat?</string>
-    <string name="input_hint_masseaten">in gramm</string>
-    <string name="input_label_bodymass">How much do you weight?</string>
-    <string name="input_hint_bodymass">in kilogramm</string>
+    <string name="input_label_body_weight">How much do you weight?</string>
+    <string name="input_hint_body_weight">in kilogram</string>
+    <string name="input_label_body_height">How large are you?</string>
+    <string name="input_hint_body_height">in meters</string>
+    <string name="input_label_body_age">How old are you?</string>
+    <string name="input_hint_body_age">in years</string>
+    <string name="input_label_body_sex">What sex are you?</string>
+
+    <string name="input_label_drink_volume">How much did you drink?</string>
+    <string name="input_hint_drink_volume">in milliliters</string>
+    <string name="input_label_drink_percent">Alcoholpercent per liter?</string>
+    <string name="input_hint_drink_percent">in percent</string>
 
     <string name="input_button_calculate">Calculate!</string>
 
@@ -99,23 +107,8 @@
         <item>Found version for blind men!</item>
         <item>Toiletpaper not found!</item>
     </string-array>-->
-    <string name="main_btn_start">Start!</string>
-    <string name="input_header_body">Body</string>
-    <string name="input_header_drink">Drink</string>
-    <string name="input_weight">Bodyweight:</string>
-    <string name="input_weight_unit">kg</string>
-    <string name="input_height">Bodyheight:</string>
-    <string name="input_height_unit">cm</string>
-    <string name="input_age">Age:</string>
-    <string name="input_age_unit">years</string>
-    <string name="input_sex">Sex:</string>
     <string name="input_sex_male">male</string>
     <string name="input_sex_female">female</string>
-    <string name="input_volume_drunken">Volume drunken:</string>
-    <string name="input_volume_drunken_unit">l</string>
-    <string name="input_volume_percent">Volumepercent:</string>
-    <string name="input_volume_percent_unit">%</string>
-    <string name="input_btn_calculate">Calculate!</string>
     <string name="menu_share">Share</string>
     <string name="menu_help">Help</string>
     <string name="menu_settings">Settings</string>

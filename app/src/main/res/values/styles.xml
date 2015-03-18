@@ -32,17 +32,18 @@
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
-    <!--
-    <style name="TextAppearence.Header" parent="@android:style/TextAppearance.Large">
-        <item name="android:textSize">@dimen/result_header_size</item>
+
+    <style name="TextAppearance.Header" parent="@style/TextAppearance.AppCompat.Large">
+        <item name="android:textSize">@dimen/text_size_header</item>
         <item name="android:lines">2</item>
         <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/abc_secondary_text_material_light</item>
     </style>
 
-    <style name="TextAppearence.Result" parent="@android:style/TextAppearance.Large">
-        <item name="android:textSize">@dimen/result_value_size</item>
+    <style name="TextAppearance.Large" parent="@style/TextAppearance.AppCompat.Large">
+        <item name="android:textSize">@dimen/abc_text_size_large_material</item>
         <item name="android:lines">1</item>
-        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/abc_secondary_text_material_light</item>
     </style>
-    -->
+
 </resources>
