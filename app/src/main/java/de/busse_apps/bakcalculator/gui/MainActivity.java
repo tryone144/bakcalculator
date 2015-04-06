@@ -30,12 +30,14 @@ public class MainActivity extends ActionBarActivity {
     public static final String SPLASH_FRAGMENT_TAG = "de.busse_apps.bakcalculator.gui.SplashFragment";
     public static final String INPUT_FRAGMENT_TAG = "de.busse_apps.bakcalculator.gui.InputFragment";
 
+    private static final String SIS_HOME_AS_UP_ENABLED = "de.busse_apps.bakcalcukatir.gui.mHomeAsUpEnabled";
+
     private FragmentManager mFragmentManager;
     private ActionBar mActionBar;
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
-    private boolean homeAsUpEnabled;
+    private boolean mHomeAsUpEnabled;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +60,14 @@ public class MainActivity extends ActionBarActivity {
         //        (DrawerLayout) findViewById(R.id.drawer_layout));
 
         if (savedInstanceState == null) {
-            homeAsUpEnabled = false;
+            mHomeAsUpEnabled = false;
             FragmentTransaction ft = mFragmentManager.beginTransaction();
 
             SplashFragment mSplashFragment = new SplashFragment();
             mSplashFragment.setArguments(getIntent().getExtras());
             ft.add(R.id.main_fragment_container, mSplashFragment, SPLASH_FRAGMENT_TAG).commit();
+        } else {
+            setHomeAsUpEnabled(savedInstanceState.getBoolean(SIS_HOME_AS_UP_ENABLED, false));
         }
 //        if (findViewById(R.id.main_fragment_container) != null) {
 //            if (savedInstanceState == null) {
@@ -88,6 +92,13 @@ public class MainActivity extends ActionBarActivity {
 //    }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(SIS_HOME_AS_UP_ENABLED, mHomeAsUpEnabled);
+
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         if (mFragmentManager.getBackStackEntryCount() > 0) {
             mFragmentManager.popBackStack();
@@ -101,9 +112,9 @@ public class MainActivity extends ActionBarActivity {
     }
 
     private void setHomeAsUpEnabled(boolean enabled) {
-        homeAsUpEnabled = enabled;
-        mActionBar.setDisplayHomeAsUpEnabled(homeAsUpEnabled);
-        mActionBar.setHomeButtonEnabled(homeAsUpEnabled);
+        mHomeAsUpEnabled = enabled;
+        mActionBar.setDisplayHomeAsUpEnabled(mHomeAsUpEnabled);
+        mActionBar.setHomeButtonEnabled(mHomeAsUpEnabled);
     }
 
     private void addFragment(Fragment fragment, String tag, Bundle args, boolean toBackStack) {
