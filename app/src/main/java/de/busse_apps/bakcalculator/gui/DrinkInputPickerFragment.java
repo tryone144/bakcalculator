@@ -21,7 +21,6 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.view.ViewGroupCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,8 +41,8 @@ public class DrinkInputPickerFragment extends DialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.fragment_drink_input, null);
 
-        //ViewGroup parent = (ViewGroup) view.findViewById(R.id.drink_input_container_name);
-        //inflater.inflate(R.layout.fragment_input_dialog_name, parent, true);
+        ViewGroup parent = (ViewGroup) view.findViewById(R.id.drink_input_container_name);
+        inflater.inflate(R.layout.fragment_input_dialog_name, parent, true);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.drink_input_header_new);

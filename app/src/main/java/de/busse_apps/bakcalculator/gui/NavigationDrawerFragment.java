@@ -39,7 +39,7 @@ import de.busse_apps.bakcalculator.R;
 
 public class NavigationDrawerFragment extends Fragment {
 
-    private static final String PREFS_DRAWER_LERNED = "de.busse_apps.bakcalculator.gui.NavigationDrawerFragment.drawerLerned";
+    private static final String PREFS_DRAWER_LEARNED = "de.busse_apps.bakcalculator.gui.NavigationDrawerFragment.drawerLearned";
     private static final String SIS_SELECTED_POSITION = "de.busse_apps.bakcalculator.gui.NavigationDrawerFragment.selectedPosition";
     private static final String SIS_HOME_AS_UP = "de.busse_apps.bakcalculator.gui.NavigationDrawerFragment.homeAsUp";
 
@@ -53,14 +53,14 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private int mSelectedPosition = 0;
     private boolean mHomeAsUp = false;
-    private boolean mDrawerLerned;
+    private boolean mDrawerLearned;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        mDrawerLerned = sp.getBoolean(PREFS_DRAWER_LERNED, false);
+        mDrawerLearned = sp.getBoolean(PREFS_DRAWER_LEARNED, false);
 
         if (savedInstanceState != null) {
             mSelectedPosition = savedInstanceState.getInt(SIS_SELECTED_POSITION, 0);
@@ -158,8 +158,8 @@ public class NavigationDrawerFragment extends Fragment {
 
         // If the user hasn't 'learned' about the drawer, open it to introduce them to the drawer,
         // per the navigation drawer design guidelines.
-        if (!mDrawerLerned && !mFromSavedInstanceState) {
-            mDrawerLayout.openDrawer(mFragmentContainerView);
+        if (!mDrawerLearned && !mFromSavedInstanceState) {
+            openDrawer();
         }
 
         // Defer code dependent on restoration of previous instance state.
@@ -184,6 +184,18 @@ public class NavigationDrawerFragment extends Fragment {
     private void disableIndicator(boolean enabled) {
         if (mDrawerToggle != null) {
             mDrawerToggle.setDrawerIndicatorEnabled(!enabled);
+        }
+    }
+
+    public void openDrawer() {
+        if ((mDrawerLayout != null) && (mFragmentContainerView != null)) {
+            mDrawerLayout.openDrawer(mFragmentContainerView);
+        }
+    }
+
+    public void closeDrawer() {
+        if ((mDrawerLayout != null) && (mFragmentContainerView != null)) {
+            mDrawerLayout.closeDrawer(mFragmentContainerView);
         }
     }
 
@@ -226,18 +238,22 @@ public class NavigationDrawerFragment extends Fragment {
         public void onDrawerSlide(View drawerView, float slideOffset) {
             super.onDrawerSlide(drawerView, slideOffset);
 
-            disableIndicator(false);
+            if (slideOffset > 0.01) {
+                disableIndicator(false);
+            } else {
+                disableIndicator(mHomeAsUp);
+            }
         }
         @Override
         public void onDrawerOpened(View drawerView) {
             super.onDrawerOpened(drawerView);
 
-            if (!mDrawerLerned) {
+            if (!mDrawerLearned) {
                 // The user manually opened the drawer; store this flag to prevent auto-showing
                 // the navigation drawer automatically in the future.
-                mDrawerLerned = true;
+                mDrawerLearned = true;
                 SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
-                sp.edit().putBoolean(PREFS_DRAWER_LERNED, true).commit();
+                sp.edit().putBoolean(PREFS_DRAWER_LEARNED, true).commit();
             }
             disableIndicator(false);
         }

@@ -21,7 +21,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
 import de.busse_apps.bakcalculator.R;
@@ -32,7 +31,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     public static final String INPUT_FRAGMENT_TAG = "de.busse_apps.bakcalculator.gui.InputFragment";
 
     private FragmentManager mFragmentManager;
-    private ActionBar mActionBar;
 
     private DrawerLayout mDrawerLayout;
     private NavigationDrawerFragment mDrawerFragment;
@@ -44,7 +42,6 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        mActionBar = getSupportActionBar();
         mFragmentManager = getSupportFragmentManager();
         mFragmentManager.addOnBackStackChangedListener(new MyBackStackListener());
 
@@ -73,6 +70,15 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 //                        .add(R.id.main_fragment_container, mainFragment).commit();
 //            }
 //        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mDrawerFragment.isDrawerOpen()) {
+            mDrawerFragment.closeDrawer();
+            return;
+        }
+        super.onBackPressed();
     }
 
     @Override

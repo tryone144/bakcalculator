@@ -31,13 +31,9 @@ public class InputFragment extends Fragment implements BodyInputPickerFragment.R
 
     private static final long CUSTOM_ENTRY_ID = -27;
 
-    private MainActivity mActivity;
     private Context mContext;
     private FragmentManager mFragmentManager;
     private PreferencesLoaderCallbacks mLoaderCallbacks;
-
-    private BodyInputPickerFragment mBodyDialog;
-    private DrinkInputPickerFragment mDrinkDialog;
 
     private SimpleCursorAdapter mBodyAdapter;
     private SimpleCursorAdapter mDrinkAdapter;
@@ -77,7 +73,6 @@ public class InputFragment extends Fragment implements BodyInputPickerFragment.R
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mActivity = (MainActivity) getActivity();
         mFragmentManager = getChildFragmentManager();
         //mBodyFragment = (BodyInputPickerFragment) mFragmentManager.findFragmentByTag(BODY_FRAGMENT_TAG);
 

@@ -16,18 +16,12 @@ package de.busse_apps.bakcalculator.db;
  * limitations under the License.
  */
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.support.v4.content.CursorLoader;
-import android.database.Cursor;
-import android.database.MatrixCursor;
-import android.database.MergeCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+import android.support.v4.content.CursorLoader;
 import android.util.Log;
-
-import de.busse_apps.bakcalculator.R;
 
 public class PreferencesHelper extends SQLiteOpenHelper {
 
