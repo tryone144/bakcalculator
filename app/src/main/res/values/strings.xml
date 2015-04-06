@@ -16,13 +16,12 @@
   -->
 <resources>
 
-    <string name="app_name">BAK Calculator</string>
+    <string name="app_name">BAC Calculator</string>
 
     <!-- MenuItem titles -->
     <string name="menu_item_help">Help</string>
     <string name="menu_item_about">About</string>
     <string name="menu_action_share">Share</string>
-
 
     <!-- SplashFragment texts -->
     <string name="splash_text_title">Blood Alcohol Concentration</string>
@@ -32,23 +31,51 @@
     <string name="splash_button_start">Start Meassure!</string>-->
 
     <!-- InputFragment texts -->
-    <string name="input_label_header">Following data is necessary:</string>
+    <string name="input_label_body_header">Body Details:</string>
+    <string name="input_label_drink_header">Drink Details:</string>
     <string name="input_divider_desc">Divider</string>
 
-    <string name="input_label_body_weight">How much do you weight?</string>
-    <string name="input_hint_body_weight">in kilogram</string>
-    <string name="input_label_body_height">How large are you?</string>
-    <string name="input_hint_body_height">in meters</string>
-    <string name="input_label_body_age">How old are you?</string>
-    <string name="input_hint_body_age">in years</string>
-    <string name="input_label_body_sex">What sex are you?</string>
-
-    <string name="input_label_drink_volume">How much did you drink?</string>
-    <string name="input_hint_drink_volume">in milliliters</string>
-    <string name="input_label_drink_percent">Alcoholpercent per liter?</string>
-    <string name="input_hint_drink_percent">in percent</string>
+    <string name="input_spinner_body_prompt">Select Body:</string>
+    <string name="input_spinner_drink_prompt">Select Drink:</string>
+    <string name="input_spinner_add_new">custom …</string>
 
     <string name="input_button_calculate">Calculate!</string>
+
+    <!-- BodyInputPickerFragment texts -->
+    <string name="body_input_header_new">Add new Body:</string>
+
+    <string name="body_input_label_weight">How much do you weight?</string>
+    <string name="body_input_hint_weight">in kilogram</string>
+    <string name="body_input_label_height">How large are you?</string>
+    <string name="body_input_hint_height">in meters</string>
+    <string name="body_input_label_age">How old are you?</string>
+    <string name="body_input_hint_age">in years</string>
+    <string name="body_input_label_sex">What sex are you?</string>
+
+    <string-array name="body_input_spinner_sex">
+        <item>male</item>
+        <item>female</item>
+    </string-array>
+
+    <!-- DrinkFragment texts -->
+    <string name="drink_input_header_new">Add new Drink:</string>
+
+    <string name="drink_input_label_volume">How much did you drink?</string>
+    <string name="drink_input_hint_volume">in milliliters</string>
+    <string name="drink_input_label_percent">Alcoholpercent per liter?</string>
+    <string name="drink_input_hint_percent">in percent</string>
+
+    <string-array name="body_samples">
+        <item>Ich</item>
+        <item>DU</item>
+        <item>Noch einer</item>
+    </string-array>
+
+    <string-array name="drink_samples">
+        <item>Bier</item>
+        <item>Saft</item>
+        <item>Pupsliter</item>
+    </string-array>
 
     <!-- ResultFragment texts --><!--
     <string name="result_wait">Calculate Energydensity&#8230;</string>
@@ -70,6 +97,8 @@
     <string name="share_msg_mid">WOW!!! %1$s</string>
     <string name="share_msg_high">Our independent assessment: \"%1$s\"</string>-->
 
+    <string name="dialog_button_save">Save</string>
+    <string name="dialog_button_cancel">Cancel</string>
     <string name="msg_error_missing_input">Error: Please insert all values.</string>
 
     <!-- ResultFragment level names --><!--

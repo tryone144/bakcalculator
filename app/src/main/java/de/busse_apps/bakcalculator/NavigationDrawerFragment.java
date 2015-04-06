@@ -138,7 +138,7 @@ public class NavigationDrawerFragment extends Fragment {
                 getActivity(),                    /* host Activity */
                 mDrawerLayout,                    /* DrawerLayout object */
                 R.drawable.ic_drawer,             /* nav drawer image to replace 'Up' caret */
-                R.string.input_label_header,  /* "open drawer" description for accessibility */
+                R.string.app_name,  /* "open drawer" description for accessibility */
                 R.string.input_divider_desc  /* "close drawer" description for accessibility */
         ) {
             @Override

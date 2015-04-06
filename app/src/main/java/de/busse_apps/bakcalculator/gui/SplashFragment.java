@@ -28,7 +28,6 @@ import de.busse_apps.bakcalculator.R;
 public class SplashFragment extends Fragment {
 
     private MainActivity mActivity;
-    private Button mButtonStart;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,7 +39,7 @@ public class SplashFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mActivity = (MainActivity) getActivity();
 
-        mButtonStart = (Button) getView().findViewById(R.id.splash_button_start);
+        Button mButtonStart = (Button) getView().findViewById(R.id.splash_button_start);
         mButtonStart.setOnClickListener(new onButtonStartClickListener());
     }
 

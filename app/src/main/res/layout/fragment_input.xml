@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?><!--
+<?xml version="1.0" encoding="utf-8"?>
+<!--
   ~ Copyright 2015 Bernd Busse
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,160 +19,104 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".gui.MainActivity">
+    tools:context=".gui.InputFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:scrollbarStyle="outsideOverlay">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- Main Header -->
+            <!-- Body Header -->
             <TextView
-                android:id="@+id/input_label_header"
+                android:id="@+id/input_label_body_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:text="@string/input_label_header"
+                android:text="@string/input_label_body_header"
                 android:textAppearance="@style/TextAppearance.Large" />
 
             <ImageView
-                android:id="@+id/input_divider_header"
+                android:id="@+id/input_divider_body_header"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@+id/input_label_header"
+                android:layout_below="@+id/input_label_body_header"
                 android:contentDescription="@string/input_divider_desc"
                 android:scaleType="fitXY"
                 android:src="@android:drawable/divider_horizontal_textfield" />
 
-            <!-- Body Weight Input -->
-            <TextView
-                android:id="@+id/input_label_body_weight"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/input_divider_header"
-                android:layout_marginTop="@dimen/element_vertical_margin"
-                android:text="@string/input_label_body_weight" />
-
-            <de.busse_apps.bakcalculator.widget.ClearableEditText
-                android:id="@+id/input_field_body_weight"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/input_label_body_weight"
-                android:drawableEnd="@drawable/ic_action_remove"
-                android:drawableRight="@drawable/ic_action_remove"
-                android:ems="10"
-                android:hint="@string/input_hint_body_weight"
-                android:inputType="numberDecimal" />
-
-            <!-- Body Height Input -->
-            <TextView
-                android:id="@+id/input_label_body_height"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/input_field_body_weight"
-                android:layout_marginTop="@dimen/element_vertical_margin"
-                android:text="@string/input_label_body_height" />
-
-            <de.busse_apps.bakcalculator.widget.ClearableEditText
-                android:id="@+id/input_field_body_height"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/input_label_body_height"
-                android:drawableEnd="@drawable/ic_action_remove"
-                android:drawableRight="@drawable/ic_action_remove"
-                android:ems="10"
-                android:hint="@string/input_hint_body_height"
-                android:inputType="numberDecimal" />
-
-            <!-- Age Input -->
-            <TextView
-                android:id="@+id/input_label_body_age"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/input_field_body_height"
-                android:layout_marginTop="@dimen/element_vertical_margin"
-                android:text="@string/input_label_body_age" />
-
-            <de.busse_apps.bakcalculator.widget.ClearableEditText
-                android:id="@+id/input_field_body_age"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/input_label_body_age"
-                android:drawableEnd="@drawable/ic_action_remove"
-                android:drawableRight="@drawable/ic_action_remove"
-                android:ems="10"
-                android:hint="@string/input_hint_body_age"
-                android:inputType="numberDecimal" />
-
-            <!-- Sex Spinner -->
-            <TextView
-                android:id="@+id/input_label_body_sex"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/input_field_body_age"
-                android:layout_marginTop="@dimen/element_vertical_margin"
-                android:text="@string/input_label_body_sex" />
-
+            <!-- Body Details -->
             <Spinner
-                android:id="@+id/input_spinner_body_sex"
+                android:id="@+id/input_spinner_body_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/input_label_body_sex"
+                android:layout_below="@+id/input_divider_body_header"
+                android:prompt="@string/input_spinner_body_prompt"
                 tools:listitem="@android:layout/simple_spinner_item" />
 
+            <FrameLayout
+                android:id="@+id/input_fragment_body_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/input_spinner_body_details" />
 
-            <!-- Drink Volume Input -->
+            <!-- Drink Header -->
             <TextView
-                android:id="@+id/input_label_drink_volume"
+                android:id="@+id/input_label_drink_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/input_spinner_body_sex"
-                android:layout_marginTop="@dimen/element_vertical_margin"
-                android:text="@string/input_label_drink_volume" />
+                android:layout_below="@+id/input_fragment_body_details"
+                android:text="@string/input_label_drink_header"
+                android:textAppearance="@style/TextAppearance.Large" />
 
-            <de.busse_apps.bakcalculator.widget.ClearableEditText
-                android:id="@+id/input_field_drink_volume"
+            <ImageView
+                android:id="@+id/input_divider_drink_header"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/input_label_drink_volume"
-                android:drawableEnd="@drawable/ic_action_remove"
-                android:drawableRight="@drawable/ic_action_remove"
-                android:ems="10"
-                android:hint="@string/input_hint_drink_volume"
-                android:inputType="numberDecimal" />
+                android:layout_height="1dp"
+                android:layout_below="@+id/input_label_drink_header"
+                android:contentDescription="@string/input_divider_desc"
+                android:scaleType="fitXY"
+                android:src="@android:drawable/divider_horizontal_textfield" />
 
-            <!-- Drink Percent Input -->
-            <TextView
-                android:id="@+id/input_label_drink_percent"
+            <!-- Drink Details -->
+            <Spinner
+                android:id="@+id/input_spinner_drink_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/input_field_drink_volume"
-                android:layout_marginTop="@dimen/element_vertical_margin"
-                android:text="@string/input_label_drink_percent" />
+                android:layout_below="@+id/input_divider_drink_header"
+                android:prompt="@string/input_spinner_drink_prompt"
+                tools:listitem="@android:layout/simple_spinner_item" />
 
-            <de.busse_apps.bakcalculator.widget.ClearableEditText
-                android:id="@+id/input_field_drink_percent"
+            <FrameLayout
+                android:id="@+id/input_fragment_drink_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/input_label_drink_percent"
-                android:drawableEnd="@drawable/ic_action_remove"
-                android:drawableRight="@drawable/ic_action_remove"
-                android:ems="10"
-                android:hint="@string/input_hint_drink_percent"
-                android:inputType="numberDecimal" />
+                android:layout_below="@+id/input_spinner_drink_details" />
 
         </RelativeLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/input_button_calculate"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:text="@string/input_button_calculate" />
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
+
+        <Button
+            android:id="@+id/input_button_calculate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/input_button_calculate" />
+
+    </RelativeLayout>
 
 </LinearLayout>

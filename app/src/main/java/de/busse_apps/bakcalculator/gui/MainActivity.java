@@ -22,8 +22,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.View;
 
 import de.busse_apps.bakcalculator.R;
 
@@ -47,7 +45,7 @@ public class MainActivity extends ActionBarActivity {
         mActionBar = getSupportActionBar();
         mFragmentManager = getSupportFragmentManager();
 
-        mFragmentManager.addOnBackStackChangedListener(new MyBackstackListener());
+        mFragmentManager.addOnBackStackChangedListener(new MyBackStackListener());
 
         mNavigationDrawerFragment = new NavigationDrawerFragment();
         //((NavigationDrawerFragment)mFragmentManager.findFragmentById(R.id.main_fragment_drawer)).setUp();
@@ -126,7 +124,7 @@ public class MainActivity extends ActionBarActivity {
     /**
      * FragmentManager.OnBackStackChangedListener for handling HomeAsUp Button
      */
-    private class MyBackstackListener implements FragmentManager.OnBackStackChangedListener {
+    private class MyBackStackListener implements FragmentManager.OnBackStackChangedListener {
         @Override
         public void onBackStackChanged() {
             boolean canback = mFragmentManager.getBackStackEntryCount() > 0;
