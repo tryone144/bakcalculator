@@ -29,12 +29,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- Empty Container for optional Name EditText -->
+        <FrameLayout
+            android:id="@+id/drink_input_container_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" />
+
         <!-- Drink Volume Input -->
         <TextView
             android:id="@+id/drink_input_label_volume"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/element_vertical_margin"
+            android:layout_below="@+id/drink_input_container_name"
             android:text="@string/drink_input_label_volume" />
 
         <de.busse_apps.bakcalculator.widget.ClearableEditText

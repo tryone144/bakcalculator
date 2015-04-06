@@ -31,6 +31,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <provider
+            android:authorities="de.busse_apps.bakcalculator.db.prefs"
+            android:name="de.busse_apps.bakcalculator.db.PreferencesProvider"
+            android:exported="false" >
+        </provider>
     </application>
 
 </manifest>

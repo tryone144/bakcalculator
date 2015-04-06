@@ -37,7 +37,10 @@
 
     <string name="input_spinner_body_prompt">Select Body:</string>
     <string name="input_spinner_drink_prompt">Select Drink:</string>
-    <string name="input_spinner_add_new">custom …</string>
+    <string name="input_spinner_custom">Custom …</string>
+
+    <string name="dialog_input_label_name">Save as</string>
+    <string name="dialog_input_hint_name">Descriptive name</string>
 
     <string name="input_button_calculate">Calculate!</string>
 
@@ -100,6 +103,9 @@
     <string name="dialog_button_save">Save</string>
     <string name="dialog_button_cancel">Cancel</string>
     <string name="msg_error_missing_input">Error: Please insert all values.</string>
+
+    <string name="drawer_open_desc">Open navigation drawer</string>
+    <string name="drawer_close_desc">Close navigation drawer</string>
 
     <!-- ResultFragment level names --><!--
     <string-array name="result_levels">

@@ -31,25 +31,28 @@ public class SplashFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_splash, container, false);
+        View view = inflater.inflate(R.layout.fragment_splash, container, false);
+
+        Button mButtonStart = (Button) view.findViewById(R.id.splash_button_start);
+        mButtonStart.setOnClickListener(new OnButtonStartClickListener());
+
+        return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mActivity = (MainActivity) getActivity();
-
-        Button mButtonStart = (Button) getView().findViewById(R.id.splash_button_start);
-        mButtonStart.setOnClickListener(new onButtonStartClickListener());
     }
 
     /**
      * View.onClickListener for Start Button
      */
-    private class onButtonStartClickListener implements View.OnClickListener {
+    private class OnButtonStartClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
             mActivity.openInputFragment();
         }
     }
+
 }

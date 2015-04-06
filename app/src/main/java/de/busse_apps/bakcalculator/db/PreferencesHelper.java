@@ -18,48 +18,47 @@ package de.busse_apps.bakcalculator.db;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.support.v4.content.CursorLoader;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.MergeCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+import android.util.Log;
 
 import de.busse_apps.bakcalculator.R;
-import de.busse_apps.bakcalculator.db.PreferencesContract.BodyEntry;
-import de.busse_apps.bakcalculator.db.PreferencesContract.DrinkEntry;
 
 public class PreferencesHelper extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "Preferences.db";
 
-    public static final long CUSTOM_ENTRY_ID = -27;
-
     private static final String TYPE_PRIMARY_KEY = " INTEGER PRIMARY KEY";
     private static final String TYPE_TEXT = " TEXT";
     private static final String TYPE_INT = " INTEGER";
 
     private static final String SQL_CREATE_BODY_ENTRIES =
-            "CREATE TABLE " + BodyEntry.TABLE_NAME + " (" +
-            BodyEntry._ID + TYPE_PRIMARY_KEY + "," +
-            BodyEntry.COLUMN_NAME_BODY_NAME + TYPE_TEXT + "," +
-            BodyEntry.COLUMN_NAME_SEX + TYPE_INT + "," +
-            BodyEntry.COLUMN_NAME_WEIGHT + TYPE_INT + "," +
-            BodyEntry.COLUMN_NAME_HEIGHT + TYPE_INT + "," +
-            BodyEntry.COLUMN_NAME_AGE + TYPE_INT +
+            "CREATE TABLE " + PreferencesContract.BodyEntry.TABLE_NAME + " (" +
+            PreferencesContract.BodyEntry._ID + TYPE_PRIMARY_KEY + "," +
+            PreferencesContract.BodyEntry.COLUMN_NAME_BODY_NAME + TYPE_TEXT + "," +
+            PreferencesContract.BodyEntry.COLUMN_NAME_SEX + TYPE_INT + "," +
+            PreferencesContract.BodyEntry.COLUMN_NAME_WEIGHT + TYPE_INT + "," +
+            PreferencesContract.BodyEntry.COLUMN_NAME_HEIGHT + TYPE_INT + "," +
+            PreferencesContract.BodyEntry.COLUMN_NAME_AGE + TYPE_INT +
             " )";
     private static final String SQL_DELETE_BODY_ENTRIES =
-            "DROP TABLE IF EXTISTS " + BodyEntry.TABLE_NAME;
+            "DROP TABLE IF EXTISTS " + PreferencesContract.BodyEntry.TABLE_NAME;
 
     private static final String SQL_CREATE_DRINK_ENTRIES =
-            "CREATE TABLE " + DrinkEntry.TABLE_NAME + " (" +
-            DrinkEntry._ID + TYPE_PRIMARY_KEY + "," +
-            DrinkEntry.COLUMN_NAME_DRINK_NAME + TYPE_TEXT + "," +
-            DrinkEntry.COLUMN_NAME_VOLUME + TYPE_INT + "," +
-            DrinkEntry.COLUMN_NAME_PERCENT + TYPE_INT +
+            "CREATE TABLE " + PreferencesContract.DrinkEntry.TABLE_NAME + " (" +
+            PreferencesContract.DrinkEntry._ID + TYPE_PRIMARY_KEY + "," +
+            PreferencesContract.DrinkEntry.COLUMN_NAME_DRINK_NAME + TYPE_TEXT + "," +
+            PreferencesContract.DrinkEntry.COLUMN_NAME_VOLUME + TYPE_INT + "," +
+            PreferencesContract.DrinkEntry.COLUMN_NAME_PERCENT + TYPE_INT +
             " )";
     private static final String SQL_DELETE_DRINK_ENTRIES =
-            "DROP TABLE IF EXISTS " + DrinkEntry.TABLE_NAME;
+            "DROP TABLE IF EXISTS " + PreferencesContract.DrinkEntry.TABLE_NAME;
 
     private Context mContext;
 
@@ -76,67 +75,61 @@ public class PreferencesHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        Log.d(PreferencesHelper.class.getName(), "Upgrading database from version " + oldVersion + " to " +
+                newVersion + ", which will destroy all old data");
         db.execSQL(SQL_DELETE_BODY_ENTRIES);
         db.execSQL(SQL_DELETE_DRINK_ENTRIES);
         onCreate(db);
     }
 
-    public long addBody(SQLiteDatabase db, String name, int sex, int weight, int height, int age) {
-        ContentValues values = new ContentValues();
-        values.put(BodyEntry.COLUMN_NAME_BODY_NAME, name);
-        values.put(BodyEntry.COLUMN_NAME_SEX, sex);
-        values.put(BodyEntry.COLUMN_NAME_WEIGHT, weight);
-        values.put(BodyEntry.COLUMN_NAME_HEIGHT, height);
-        values.put(BodyEntry.COLUMN_NAME_AGE, age);
+//    public long addBody(SQLiteDatabase db, String name, int sex, int weight, int height, int age) {
+//        ContentValues values = new ContentValues();
+//        values.put(PreferencesContract.BodyEntry.COLUMN_NAME_BODY_NAME, name);
+//        values.put(PreferencesContract.BodyEntry.COLUMN_NAME_SEX, sex);
+//        values.put(PreferencesContract.BodyEntry.COLUMN_NAME_WEIGHT, weight);
+//        values.put(PreferencesContract.BodyEntry.COLUMN_NAME_HEIGHT, height);
+//        values.put(PreferencesContract.BodyEntry.COLUMN_NAME_AGE, age);
+//
+//        return db.insert(PreferencesContract.BodyEntry.TABLE_NAME, null, values);
+//    }
 
-        return db.insert(BodyEntry.TABLE_NAME, null, values);
+    public static CursorLoader getBodyList(Context ctx) {
+        return new CursorLoader(ctx,
+                PreferencesContract.BodyEntry.CONTENT_URI,
+                PreferencesContract.BodyEntry.PROJECTION_BODY_LIST,
+                null, null,
+                PreferencesContract.BodyEntry.COLUMN_NAME_BODY_NAME + " DESC");
     }
 
-    public Cursor getBodyList(SQLiteDatabase db) {
-        Cursor result = db.query(BodyEntry.TABLE_NAME,
-                BodyEntry.PROJECTION_BODY_LIST,
-                null,
-                null,
-                null,
-                null,
-                BodyEntry.COLUMN_NAME_BODY_NAME + " DESC");
-
-        MatrixCursor custom = new MatrixCursor(BodyEntry.PROJECTION_BODY_LIST);
-        custom.addRow(new Object[] {CUSTOM_ENTRY_ID, mContext.getString(R.string.input_spinner_add_new)});
-
-        return new MergeCursor(new Cursor[] {result, custom});
+    public static CursorLoader getBodyById(Context ctx, long id) {
+        return new CursorLoader(ctx,
+                Uri.withAppendedPath(PreferencesContract.BodyEntry.CONTENT_URI, String.valueOf(id)),
+                PreferencesContract.BodyEntry.PROJECTION_BODY_LIST,
+                null, null, null);
     }
 
-    public void getBodyById(SQLiteDatabase db, long id) {
-
+    public static CursorLoader getDrinkList(Context ctx) {
+        return new CursorLoader(ctx,
+                PreferencesContract.DrinkEntry.CONTENT_URI,
+                PreferencesContract.DrinkEntry.PROJECTION_DRINK_LIST,
+                null, null,
+                PreferencesContract.DrinkEntry.COLUMN_NAME_DRINK_NAME + " DESC");
     }
 
-    public long addDrink(SQLiteDatabase db, String name, int volume, int percent) {
-        ContentValues values = new ContentValues();
-        values.put(DrinkEntry.COLUMN_NAME_DRINK_NAME, name);
-        values.put(DrinkEntry.COLUMN_NAME_VOLUME, volume);
-        values.put(DrinkEntry.COLUMN_NAME_PERCENT, percent);
-
-        return db.insert(DrinkEntry.TABLE_NAME, null, values);
+    public static CursorLoader getDrinkById(Context ctx, long id) {
+        return new CursorLoader(ctx,
+                Uri.withAppendedPath(PreferencesContract.DrinkEntry.CONTENT_URI, String.valueOf(id)),
+                PreferencesContract.DrinkEntry.PROJECTION_DRINK_LIST,
+                null, null, null);
     }
 
-    public Cursor getDrinkList(SQLiteDatabase db) {
-        Cursor result = db.query(DrinkEntry.TABLE_NAME,
-                DrinkEntry.PROJECTION_DRINK_LIST,
-                null,
-                null,
-                null,
-                null,
-                DrinkEntry.COLUMN_NAME_DRINK_NAME + " DESC");
-
-        MatrixCursor custom = new MatrixCursor(DrinkEntry.PROJECTION_DRINK_LIST);
-        custom.addRow(new Object[] {CUSTOM_ENTRY_ID, mContext.getString(R.string.input_spinner_add_new)});
-
-        return new MergeCursor(new Cursor[] {result, custom});
-    }
-
-    public void getDrinkById(SQLiteDatabase db, long id) {
-
-    }
+//    public long addDrink(SQLiteDatabase db, String name, int volume, int percent) {
+//        ContentValues values = new ContentValues();
+//        values.put(PreferencesContract.DrinkEntry.COLUMN_NAME_DRINK_NAME, name);
+//        values.put(PreferencesContract.DrinkEntry.COLUMN_NAME_VOLUME, volume);
+//        values.put(PreferencesContract.DrinkEntry.COLUMN_NAME_PERCENT, percent);
+//
+//        return db.insert(PreferencesContract.DrinkEntry.TABLE_NAME, null, values);
+//    }
 
 }

@@ -29,12 +29,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <!-- Empty Container for optional Name EditText -->
+        <FrameLayout
+            android:id="@+id/body_input_container_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" />
+
         <!-- Sex Spinner -->
         <TextView
             android:id="@+id/body_input_label_sex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/element_vertical_margin"
+            android:layout_below="@+id/body_input_container_name"
             android:text="@string/body_input_label_sex" />
 
         <Spinner

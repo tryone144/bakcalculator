@@ -21,8 +21,10 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.view.ViewGroupCompat;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import de.busse_apps.bakcalculator.R;
@@ -39,6 +41,9 @@ public class DrinkInputPickerFragment extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.fragment_drink_input, null);
+
+        //ViewGroup parent = (ViewGroup) view.findViewById(R.id.drink_input_container_name);
+        //inflater.inflate(R.layout.fragment_input_dialog_name, parent, true);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.drink_input_header_new);

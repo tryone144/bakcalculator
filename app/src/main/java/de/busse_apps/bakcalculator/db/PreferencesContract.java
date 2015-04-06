@@ -16,6 +16,7 @@ package de.busse_apps.bakcalculator.db;
  * limitations under the License.
  */
 
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 public final class PreferencesContract {
@@ -31,9 +32,12 @@ public final class PreferencesContract {
         public static final String COLUMN_NAME_HEIGHT = "height";
         public static final String COLUMN_NAME_AGE = "age";
 
+        public static final String BASE_PATH = "bodys";
+        public static final Uri CONTENT_URI = Uri.parse("content://" + PreferencesProvider.AUTHORITY + "/" + BASE_PATH);
+
         public static final String[] PROJECTION_BODY_LIST= {
-            _ID,
-            COLUMN_NAME_BODY_NAME,
+                _ID,
+                COLUMN_NAME_BODY_NAME,
         };
     }
 
@@ -43,6 +47,9 @@ public final class PreferencesContract {
         public static final String COLUMN_NAME_DRINK_NAME = "name";
         public static final String COLUMN_NAME_VOLUME = "volume";
         public static final String COLUMN_NAME_PERCENT = "percent";
+
+        public static final String BASE_PATH = "drinks";
+        public static final Uri CONTENT_URI = Uri.parse("content://" + PreferencesProvider.AUTHORITY + "/" + BASE_PATH);
 
         public static final String[] PROJECTION_DRINK_LIST= {
                 _ID,
