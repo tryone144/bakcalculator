@@ -20,24 +20,24 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
 import de.busse_apps.bakcalculator.R;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     public static final String SPLASH_FRAGMENT_TAG = "de.busse_apps.bakcalculator.gui.SplashFragment";
     public static final String INPUT_FRAGMENT_TAG = "de.busse_apps.bakcalculator.gui.InputFragment";
 
-    private static final String SIS_HOME_AS_UP_ENABLED = "de.busse_apps.bakcalcukatir.gui.mHomeAsUpEnabled";
-
     private FragmentManager mFragmentManager;
     private ActionBar mActionBar;
 
-    private NavigationDrawerFragment mNavigationDrawerFragment;
+    private DrawerLayout mDrawerLayout;
+    private NavigationDrawerFragment mDrawerFragment;
 
-    private boolean mHomeAsUpEnabled;
+    private CharSequence mTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,28 +46,23 @@ public class MainActivity extends ActionBarActivity {
         
         mActionBar = getSupportActionBar();
         mFragmentManager = getSupportFragmentManager();
-
         mFragmentManager.addOnBackStackChangedListener(new MyBackStackListener());
 
-        mNavigationDrawerFragment = new NavigationDrawerFragment();
-        //((NavigationDrawerFragment)mFragmentManager.findFragmentById(R.id.main_fragment_drawer)).setUp();
-        //mNavigationDrawerFragment = (NavigationDrawerFragment) mFragmentManager.findFragmentById(R.id.main_fragment_drawer);
-        //mTitle = getTitle();
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
+        mDrawerFragment = (NavigationDrawerFragment) mFragmentManager.findFragmentById(R.id.main_fragment_drawer);
+        //mDrawerFragment = new NavigationDrawerFragment();
+        mDrawerFragment.setUp(R.id.main_fragment_drawer, mDrawerLayout);
 
-        // Set up the drawer.
-        //mNavigationDrawerFragment.setUp(
-        //        R.id.main_navigation_drawer,
-        //        (DrawerLayout) findViewById(R.id.drawer_layout));
+        mTitle = getTitle();
 
         if (savedInstanceState == null) {
-            mHomeAsUpEnabled = false;
             FragmentTransaction ft = mFragmentManager.beginTransaction();
 
             SplashFragment mSplashFragment = new SplashFragment();
             mSplashFragment.setArguments(getIntent().getExtras());
             ft.add(R.id.main_fragment_container, mSplashFragment, SPLASH_FRAGMENT_TAG).commit();
-        } else {
-            setHomeAsUpEnabled(savedInstanceState.getBoolean(SIS_HOME_AS_UP_ENABLED, false));
+
+            mDrawerFragment.setHomeAsUp(false);
         }
 //        if (findViewById(R.id.main_fragment_container) != null) {
 //            if (savedInstanceState == null) {
@@ -80,41 +75,23 @@ public class MainActivity extends ActionBarActivity {
 //        }
     }
 
-//    public void onClickButtonStart(View view) {
-//        InputFragment inputFragment = new InputFragment();
-//        Bundle args = new Bundle();
-//        inputFragment.setArguments(args);
-//
-//        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//        transaction.replace(R.id.main_fragment_container, inputFragment);
-//        transaction.addToBackStack(null);
-//        transaction.commit();
-//    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putBoolean(SIS_HOME_AS_UP_ENABLED, mHomeAsUpEnabled);
-
-        super.onSaveInstanceState(outState);
-    }
-
     @Override
     public boolean onSupportNavigateUp() {
-        if (mFragmentManager.getBackStackEntryCount() > 0) {
+        if ((mFragmentManager.getBackStackEntryCount() > 0) &&
+                !(mDrawerFragment.isDrawerOpen())) {
             mFragmentManager.popBackStack();
         }
         return false;
     }
 
+    @Override
+    public void onNavigationDrawerItemSelected(int position) {
+        // Replace Main Fragments
+    }
+
     protected void openInputFragment() {
         InputFragment mInputFragment = new InputFragment();
         addFragment(mInputFragment, INPUT_FRAGMENT_TAG, null, true);
-    }
-
-    private void setHomeAsUpEnabled(boolean enabled) {
-        mHomeAsUpEnabled = enabled;
-        mActionBar.setDisplayHomeAsUpEnabled(mHomeAsUpEnabled);
-        mActionBar.setHomeButtonEnabled(mHomeAsUpEnabled);
     }
 
     private void addFragment(Fragment fragment, String tag, Bundle args, boolean toBackStack) {
@@ -126,10 +103,6 @@ public class MainActivity extends ActionBarActivity {
             ft.addToBackStack(tag);
         }
         ft.commit();
-
-        if (toBackStack) {
-            setHomeAsUpEnabled(true);
-        }
     }
 
     /**
@@ -138,8 +111,9 @@ public class MainActivity extends ActionBarActivity {
     private class MyBackStackListener implements FragmentManager.OnBackStackChangedListener {
         @Override
         public void onBackStackChanged() {
-            boolean canback = mFragmentManager.getBackStackEntryCount() > 0;
-            setHomeAsUpEnabled(canback);
+            boolean mCanBack = mFragmentManager.getBackStackEntryCount() > 0;
+            mDrawerFragment.setHomeAsUp(mCanBack);
         }
     }
+
 }
